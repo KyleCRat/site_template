@@ -13,14 +13,10 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-// require jquery.remotipart
+//= require jquery.remotipart
 
 //= require foundation
 //= require turbolinks
-
-// Require Client Side Form Validations
-//= require rails.validations
-//= require rails.validations.simple_form
 
 //= require jquery.slick
 //= require js.cookie
@@ -29,9 +25,11 @@
 
 // Require Other JS Libraries
 // require countUp
+//= require nested_form_fields
 
 // Require GSAP animation libraries
 //= require 'greensock/plugins/CSSPlugin'
+//= require 'greensock/plugins/ScrollToPlugin'
 //= require 'greensock/jquery.gsap.js'
 //= require 'greensock/easing/EasePack'
 //= require 'greensock/TweenLite'
@@ -39,38 +37,27 @@
 // require 'greensock/TweenMax'
 // require 'greensock/TimelineMax'
 
-// Include froala wysiwyg
-// require froala_editor.min.js
-
-// Include other plugins for froala
-// require plugins/align.min.js
-// require plugins/char_counter.min.js
-// require plugins/code_beautifier.min.js
-// require plugins/code_view.min.js
-// require plugins/colors.min.js
-// require plugins/draggable.min.js
-// require plugins/entities.min.js
-// require plugins/file.min.js
-// require plugins/font_family.min.js
-// require plugins/font_size.min.js
-// require plugins/fullscreen.min.js
-// require plugins/image.min.js
-// require plugins/image_manager.min.js
-// require plugins/inline_style.min.js
-// require plugins/line_breaker.min.js
-// require plugins/link.min.js
-// require plugins/lists.min.js
-// require plugins/paragraph_format.min.js
-// require plugins/paragraph_style.min.js
-// require plugins/quick_insert.min.js
-// require plugins/quote.min.js
-// require plugins/save.min.js
-// require plugins/table.min.js
-// require plugins/url.min.js
-// require plugins/video.min.js
-
 // get the rest of the js tree
 //= require_tree .
+
+const success = [
+ 'background: green',
+ 'color: white',
+ 'display: block',
+ 'padding: 4px 36px',
+ 'min-width: 400px',
+ 'text-align: center'
+].join(';');
+
+const failure = [
+ 'background: red',
+ 'color: white',
+ 'display: block',
+ 'padding: 4px 36px',
+ 'min-width: 400px',
+ 'text-align: center'
+].join(';');
+
 
 if (SiteBindings.logging) console.log('Site Loaded at: '+ new Date().getTime());
 
@@ -81,7 +68,7 @@ if (SiteBindings.logging) console.log('Site Loaded at: '+ new Date().getTime());
 // When closing a foundation reveal if it was an Ajax modal destroy it
 $(document).on('closed.zf.reveal', function() {
   // Destroy the foundation instance then remove any closed ajax reveals
-  $('.ajax-reveal').foundation('destroy').remove();
+  // $('.ajax-reveal').foundation('destroy').remove();
 });
 
 ///////////////////////////////////////////////////
@@ -123,11 +110,6 @@ function initalize() {
   SiteBindings.scrollFunctions();
   SiteBindings.pageSpecificJS();
   SiteBindings.pageSlickSliders();
-
-  // SiteBindings.contentEditable();
-  // SiteBindings.refreshOnResize();
-  // SiteBindings.smoothAnchor();
-  // SiteBindings.datepicker();
 }
 
 function fireJsInitialized() {
@@ -157,27 +139,48 @@ var addTurbolinksLoadListener = (function() {
   };
 })();
 
-tryInit();
-
 // Try to initalize as long as async javascript is ready
 function tryInit() {
-  if (SiteBindings.logging) console.log('tryInit -> Fired');
-  if (SiteBindings.logging) console.log('tryinit -> inside');
+    if (SiteBindings.logging) console.log('application.js - tryInit()');
 
-  if (typeof $ == 'function' && typeof SiteBindings == 'object' && (typeof DOMContentLoaded != 'undefined' && DOMContentLoaded === true)) {
+    if (typeof $ == 'function' && typeof SiteBindings == 'object' && (typeof DOMContentLoaded != 'undefined' && DOMContentLoaded === true)) {
 
-    if (SiteBindings.logging) console.log('tryinit -> jQuery, DOMContentLoaded and SiteBindings Initalized');
-    // If jqeury is loaded and sitebindings defined fire initalize
-    initalize();
-    addTurbolinksLoadListener();
+        if (SiteBindings.logging) console.info('%c Page Ready', success);
+        // Reset the load error count for next page load
+        SiteBindings.loadErrorCount = 0;
+        // If site is propoerly set up, initialize all javascript needed for site
+        initalize();
+        // And then add the event listener for turbolink page navigation
+        addTurbolinksLoadListener();
 
-  } else {
+    } else {
+        // Log the approporiate error that has caused the js to not load
+        if (SiteBindings.logging) console.info('%c Page Not Ready', failure);
+        if (SiteBindings.logging && typeof $ != 'function') console.error('jQuery NOT LOADING');
+        if (SiteBindings.logging && typeof SiteBindings != 'object') console.error('SiteBindings NOT INITALIZED');
+        if (SiteBindings.logging && typeof DOMContentLoaded == 'undefined') console.error('DOMContentLoaded NOT SET');
+        if (SiteBindings.logging && DOMContentLoaded !== true) console.error('DOMContentLoaded NOT TRUE');
 
-    //Otherwise wait 10ms and try again
-    if (SiteBindings.logging) console.warn('tryinit -> else: Rquirements not loaded yet');
-    window.setTimeout(function(){
-      if (SiteBindings.logging) console.log('tryinit -> else -> tryInit()');
-      tryInit();
-    }, 10);
-  }
+        if (SiteBindings.loadErrorCount > 20) {
+            // If The page has failed to load 20 times, reload the page after a 5 second pause
+            if (SiteBindings.logging) console.info('%c Page has failed to load 20 times - Reloading in 5 seconds', failure);
+            window.setTimeout(function(){
+                window.location.reload(false);
+            }, 5000);
+
+        } else {
+
+            // Otherwise wait 50ms, add 1 to the loadErrorCount and try again
+            SiteBindings.loadErrorCount += 1;
+            window.setTimeout(function(){
+                if (SiteBindings.logging) console.warn('trying to reinitalize via tryInit()');
+                tryInit();
+            }, 50);
+        }
+    }
 }
+
+// Fire the inital tryInit function after 50ms to allow for DOMContentLoaded
+window.setTimeout(function(){
+    tryInit();
+}, 50);
