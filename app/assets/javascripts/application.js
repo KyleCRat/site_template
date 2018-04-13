@@ -65,10 +65,11 @@ if (SiteBindings.logging) console.log('Site Loaded at: '+ new Date().getTime());
 // Global Watchers
 ///////////////////////////////////////////////////
 
-// When closing a foundation reveal if it was an Ajax modal destroy it
-$(document).on('closed.zf.reveal', function() {
-  // Destroy the foundation instance then remove any closed ajax reveals
-  // $('.ajax-reveal').foundation('destroy').remove();
+// When closing an ajax revealed modal destroy it
+$(document).on('closed.zf.reveal', '.ajax-reveal', function(e) {
+  window.setTimeout(function(){
+      $(e.target).foundation('destroy').remove();
+  }, 50);
 });
 
 ///////////////////////////////////////////////////
