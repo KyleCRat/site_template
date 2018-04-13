@@ -16,6 +16,9 @@ gem 'jbuilder'
 # Use Redis for cache store
 gem 'redis-rails'
 
+# Cache large items quickly
+gem 'bootsnap', require: false
+
 ##########################################
 # Documentation
 ##########################################
