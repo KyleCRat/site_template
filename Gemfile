@@ -177,12 +177,12 @@ gem 'puma_worker_killer'
     gem 'letter_opener'
 
     # A library for setting up Ruby objects as test data
-    gem 'factory_girl_rails'
+    gem "factory_bot"
 
     # A library for generating fake data
     gem 'faker'
 
-    #
+    # Rspec testing library
     gem 'rspec-rails'
   end
 
