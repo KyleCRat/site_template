@@ -41,26 +41,22 @@
 //= require_tree .
 
 const success = [
- 'background: green',
- 'color: white',
- 'display: block',
- 'padding: 4px 36px',
- 'min-width: 400px',
- 'text-align: center'
+    'background: green',
+    'color: white',
+    'display: block',
+    'padding: 4px 36px',
+    'min-width: 400px',
+    'text-align: center'
 ].join(';');
 
 const failure = [
- 'background: red',
- 'color: white',
- 'display: block',
- 'padding: 4px 36px',
- 'min-width: 400px',
- 'text-align: center'
+    'background: red',
+    'color: white',
+    'display: block',
+    'padding: 4px 36px',
+    'min-width: 400px',
+    'text-align: center'
 ].join(';');
-
-document.addEventListener("turbolinks:load", function() {
-  if (SiteBindings.logging) console.log('turbolinks:load');
-}
 
 
 if (SiteBindings.logging) console.log('Site Loaded at: '+ new Date().getTime());
@@ -71,9 +67,9 @@ if (SiteBindings.logging) console.log('Site Loaded at: '+ new Date().getTime());
 
 // When closing an ajax revealed modal destroy it
 $(document).on('closed.zf.reveal', '.ajax-reveal', function(e) {
-  window.setTimeout(function(){
-      $(e.target).foundation('destroy').remove();
-  }, 50);
+    window.setTimeout(function(){
+        $(e.target).foundation('destroy').remove();
+    }, 50);
 });
 
 ///////////////////////////////////////////////////
@@ -99,93 +95,98 @@ window.paralaxAnimationSpeed = 0.05;
 ///////////////////////////////////////////////////
 function initalize() {
 
-  if (SiteBindings.logging) console.log('initalize -> Fired');
+    if (SiteBindings.logging) console.log('initalize -> Fired');
 
-  // Initalize The Scroll Checking Function on first
-  //   load of the site
-  if (SiteBindings.isLoading) {
+    // Initalize The Scroll Checking Function on first
+    //   load of the site
+    if (SiteBindings.isLoading) {
     SiteBindings.session.startTime = Date.now();
     SiteBindings.isLoading = false;
     SiteBindings.scrollCheck();
-  }
+    }
 
-  fireJsInitialized();
+    fireJsInitialized();
 
-  $(function(){ $(document).foundation(); });
+    $(function(){ $(document).foundation(); });
 
-  SiteBindings.scrollFunctions();
-  SiteBindings.pageSpecificJS();
-  SiteBindings.pageSlickSliders();
+    SiteBindings.scrollFunctions();
+    SiteBindings.pageSpecificJS();
+    SiteBindings.pageSlickSliders();
 }
 
 function fireJsInitialized() {
-  if (SiteBindings.logging) console.log('js:initalized fired');
-  var event = document.createEvent('Event');
-  event.initEvent('js:initalized', true, true); //can bubble, and is cancellable
-  document.dispatchEvent(event);
+    if (SiteBindings.logging) console.log('js:initalized fired');
+    var event = document.createEvent('Event');
+    event.initEvent('js:initalized', true, true); //can bubble, and is cancellable
+    document.dispatchEvent(event);
 }
+
+document.addEventListener("turbolinks:load", function() {
+    SiteBindings.session.pagesVisited += 1;
+    initalize();
+});
 
 // Initalize on page load
-var addTurbolinksLoadListener = (function() {
-  var executed = false;
-
-  return function () {
-    if (!executed) {
-      executed = true;
-      if (SiteBindings.logging) console.log('addTurbolinksLoadListener -> Event Listener Loaded');
-
-      document.addEventListener("turbolinks:load", function() {
-        if (SiteBindings.logging) console.log('tryInit -> Page Load Fired');
-
-        SiteBindings.session.pagesVisited += 1;
-
-        tryInit();
-      });
-    }
-  };
-})();
+// var addTurbolinksLoadListener = (function() {
+//   var executed = false;
+//
+//   return function () {
+//     if (!executed) {
+//       executed = true;
+//       if (SiteBindings.logging) console.log('addTurbolinksLoadListener -> Event Listener Loaded');
+//
+//       document.addEventListener("turbolinks:load", function() {
+//         if (SiteBindings.logging) console.log('tryInit -> Page Load Fired');
+//
+//         SiteBindings.session.pagesVisited += 1;
+//
+//         tryInit();
+//       });
+//     }
+//   };
+// })();
 
 // Try to initalize as long as async javascript is ready
-function tryInit() {
-    'use strict'
+// function tryInit() {
+//     'use strict'
+//
+//     if (SiteBindings.logging) console.log('application.js - tryInit()');
+//
+//     if (typeof $ == 'function' && typeof SiteBindings == 'object') {
+//
+//         if (SiteBindings.logging) console.info('%c Page Ready', success);
+//         // Reset the load error count for next page load
+//         SiteBindings.loadErrorCount = 0;
+//         // If site is propoerly set up, initialize all javascript needed for site
+//         initalize();
+//         // And then add the event listener for turbolink page navigation
+//         addTurbolinksLoadListener();
+//
+//     } else {
+//         // Log the approporiate error that has caused the js to not load
+//         if (SiteBindings.logging) console.info('%c Page Not Ready', failure);
+//         if (SiteBindings.logging && typeof $ != 'function') console.error('jQuery NOT LOADING');
+//         if (SiteBindings.logging && typeof SiteBindings != 'object') console.error('SiteBindings NOT INITALIZED');
+//         // if (SiteBindings.logging && typeof DOMContentLoaded == 'undefined') console.error('DOMContentLoaded NOT SET');
+//         // if (SiteBindings.logging && DOMContentLoaded !== true) console.error('DOMContentLoaded NOT TRUE');
+//
+//         if (SiteBindings.loadErrorCount > 20) {
+//             // If The page has failed to load 20 times, reload the page after a 5 second pause
+//             if (SiteBindings.logging) console.info('%c Page has failed to load 20 times - Reloading in 5 seconds', failure);
+//             window.setTimeout(function(){
+//                 window.location.reload(false);
+//             }, 5000);
+//
+//         } else {
+//
+//             // Otherwise wait 50ms, add 1 to the loadErrorCount and try again
+//             SiteBindings.loadErrorCount += 1;
+//             window.setTimeout(function(){
+//                 if (SiteBindings.logging) console.warn('trying to reinitalize via tryInit()');
+//                 tryInit();
+//             }, 50);
+//         }
+//     }
+// }
 
-    if (SiteBindings.logging) console.log('application.js - tryInit()');
-
-    if (typeof $ == 'function' && typeof SiteBindings == 'object') {
-
-        if (SiteBindings.logging) console.info('%c Page Ready', success);
-        // Reset the load error count for next page load
-        SiteBindings.loadErrorCount = 0;
-        // If site is propoerly set up, initialize all javascript needed for site
-        initalize();
-        // And then add the event listener for turbolink page navigation
-        addTurbolinksLoadListener();
-
-    } else {
-        // Log the approporiate error that has caused the js to not load
-        if (SiteBindings.logging) console.info('%c Page Not Ready', failure);
-        if (SiteBindings.logging && typeof $ != 'function') console.error('jQuery NOT LOADING');
-        if (SiteBindings.logging && typeof SiteBindings != 'object') console.error('SiteBindings NOT INITALIZED');
-        // if (SiteBindings.logging && typeof DOMContentLoaded == 'undefined') console.error('DOMContentLoaded NOT SET');
-        // if (SiteBindings.logging && DOMContentLoaded !== true) console.error('DOMContentLoaded NOT TRUE');
-
-        if (SiteBindings.loadErrorCount > 20) {
-            // If The page has failed to load 20 times, reload the page after a 5 second pause
-            if (SiteBindings.logging) console.info('%c Page has failed to load 20 times - Reloading in 5 seconds', failure);
-            window.setTimeout(function(){
-                window.location.reload(false);
-            }, 5000);
-
-        } else {
-
-            // Otherwise wait 50ms, add 1 to the loadErrorCount and try again
-            SiteBindings.loadErrorCount += 1;
-            window.setTimeout(function(){
-                if (SiteBindings.logging) console.warn('trying to reinitalize via tryInit()');
-                tryInit();
-            }, 50);
-        }
-    }
-}
-
-tryInit();
+// tryInit();
