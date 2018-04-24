@@ -27,7 +27,9 @@ gem 'bootsnap', require: false
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Eaily view db schemas - bundle exec annotate
-gem 'annotate'
+group :development do
+  gem 'annotate'
+end
 
 ##########################################
 # Design, structure, and management
@@ -91,13 +93,6 @@ gem 'devise'
 
 # pundit authorization system
 gem 'pundit'
-
-##########################################
-# Socail Media API
-##########################################
-
-# Facebook Graph API
-# gem 'koala', '~> 2.2'
 
 ##########################################
 # Uploading and Storage
