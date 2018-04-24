@@ -100,6 +100,7 @@ function initalize() {
   // Initalize The Scroll Checking Function on first
   //   load of the site
   if (SiteBindings.isLoading) {
+    SiteBindings.session.startTime = Date.now();
     SiteBindings.isLoading = false;
     SiteBindings.scrollCheck();
   }
@@ -142,9 +143,11 @@ var addTurbolinksLoadListener = (function() {
 
 // Try to initalize as long as async javascript is ready
 function tryInit() {
+    'use strict'
+
     if (SiteBindings.logging) console.log('application.js - tryInit()');
 
-    if (typeof $ == 'function' && typeof SiteBindings == 'object' && (typeof DOMContentLoaded != 'undefined' && DOMContentLoaded === true)) {
+    if (typeof $ == 'function' && typeof SiteBindings == 'object') {
 
         if (SiteBindings.logging) console.info('%c Page Ready', success);
         // Reset the load error count for next page load
@@ -159,8 +162,8 @@ function tryInit() {
         if (SiteBindings.logging) console.info('%c Page Not Ready', failure);
         if (SiteBindings.logging && typeof $ != 'function') console.error('jQuery NOT LOADING');
         if (SiteBindings.logging && typeof SiteBindings != 'object') console.error('SiteBindings NOT INITALIZED');
-        if (SiteBindings.logging && typeof DOMContentLoaded == 'undefined') console.error('DOMContentLoaded NOT SET');
-        if (SiteBindings.logging && DOMContentLoaded !== true) console.error('DOMContentLoaded NOT TRUE');
+        // if (SiteBindings.logging && typeof DOMContentLoaded == 'undefined') console.error('DOMContentLoaded NOT SET');
+        // if (SiteBindings.logging && DOMContentLoaded !== true) console.error('DOMContentLoaded NOT TRUE');
 
         if (SiteBindings.loadErrorCount > 20) {
             // If The page has failed to load 20 times, reload the page after a 5 second pause
@@ -181,7 +184,4 @@ function tryInit() {
     }
 }
 
-// Fire the inital tryInit function after 50ms to allow for DOMContentLoaded
-window.setTimeout(function(){
-    tryInit();
-}, 50);
+tryInit();

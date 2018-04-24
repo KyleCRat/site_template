@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script id="fr-fek">try{(function (k){localStorage.FEK=k;t=document.getElementById('fr-fek');t.parentNode.removeChild(t);})('GIBEVFBOHF1c1UNYVM==')}catch(e){}</script>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -29,17 +27,17 @@
     <meta name="description" content="<%= meta_description %>">
 
     <script>
-    var DOMContentLoaded = false;
-    document.addEventListener("DOMContentLoaded", function(event) {
-      DOMContentLoaded = true;
-    });
+    // var DOMContentLoaded = false;
+    // document.addEventListener("DOMContentLoaded", function(event) {
+    //   DOMContentLoaded = true;
+    // });
     </script>
 
     <%= split_stylesheet_link_tag "application", debug: false if ['staging','production'].include?(Rails.env)  %>
     <%= stylesheet_link_tag "application", media: 'all' unless ['staging','production'].include?(Rails.env) %>
 
     <%= javascript_include_tag :modernizr %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true, :async => ['staging','production'].include?(Rails.env)  %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true, :defer => ['staging','production'].include?(Rails.env)  %>
 
     <%= csrf_meta_tags %>
   </head>

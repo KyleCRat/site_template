@@ -7,7 +7,9 @@ window.SiteBindings = {
     page: {
     },
     session: {
-      pagesVisited: 1
+      pagesVisited: 1,
+      startTime: null,
+      endTime: null
     },
     logging: true,
     loadErrorCount: 0,
