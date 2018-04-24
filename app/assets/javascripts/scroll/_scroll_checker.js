@@ -19,7 +19,7 @@ window.currentPos = 0;
 window.previousPos = 0;
 window.timestamp = 0;
 
-SiteBindings.scrollCheck = function() {
+Site.scrollCheck = function() {
 
   var scrollFrame = requestAnimationFrame(function(timestamp) {
     fireScrollFunctions(timestamp);

@@ -1,4 +1,4 @@
-SiteBindings.ahht = function() {
+Site.ahht = function() {
     // ahht: Auto Height On Hover Animation
 
     // hoverActionClass: .ahht-on-hover

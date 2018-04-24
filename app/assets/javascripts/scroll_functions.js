@@ -1,6 +1,6 @@
 // Function that checks which page we are on and then
 //   puts the approperiate animations in an array
-SiteBindings.scrollFunctions = function() {
+Site.scrollFunctions = function() {
 
   //Empty scroll_function_array on nav click
   $(document).on('turbolinks:visit', function(){
@@ -13,7 +13,7 @@ SiteBindings.scrollFunctions = function() {
   switch(url) { //Page specfic Animations && Javascript
     case '/':
       window.scroll_function_array = [
-        //SiteBindings.exampleFunction
+        //Site.exampleFunction
       ];
       break;
     default: // Set the scroll_function_array on any page not specified above
@@ -21,6 +21,6 @@ SiteBindings.scrollFunctions = function() {
   }
   //Global Animations
   window.scroll_function_array.push(
-    //SiteBindings.exampleGlobalFunction
+    //Site.exampleGlobalFunction
   );
 }

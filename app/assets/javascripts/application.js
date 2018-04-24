@@ -40,26 +40,7 @@
 // get the rest of the js tree
 //= require_tree .
 
-const success = [
-    'background: green',
-    'color: white',
-    'display: block',
-    'padding: 4px 36px',
-    'min-width: 400px',
-    'text-align: center'
-].join(';');
-
-const failure = [
-    'background: red',
-    'color: white',
-    'display: block',
-    'padding: 4px 36px',
-    'min-width: 400px',
-    'text-align: center'
-].join(';');
-
-
-if (SiteBindings.logging) console.log('Site Loaded at: '+ new Date().getTime());
+if (Site.logging) console.log('Site Loaded at: '+ new Date().getTime());
 
 ///////////////////////////////////////////////////
 // Global Watchers
@@ -88,105 +69,38 @@ window.paralaxAnimationSpeed = 0.05;
 
 
 ///////////////////////////////////////////////////
-// Initialize all javascript for the site once
-//   jQuery and SiteBindings have been confirmed
-//   to be loaded - This allows your application.js
-//   to safely load asynchronously
+// All javascript that fires per page will be in
+//   the initalize function, it fires once on site
+//   load and once per page change
 ///////////////////////////////////////////////////
 function initialize() {
 
-    if (SiteBindings.logging) console.log('initialize -> Fired');
+    if (Site.logging) console.log('initialize -> Fired');
 
-    // Initialize The Scroll Checking Function on first
-    //   load of the site
-    if (SiteBindings.isLoading) {
-    SiteBindings.session.startTime = Date.now();
-    SiteBindings.isLoading = false;
-    SiteBindings.scrollCheck();
+    // Fire only on inital site load
+    if (Site.isLoading) {
+        Site.session.startTime = Date.now();
+        Site.isLoading = false;
+        Site.scrollCheck();
     }
 
     fireJsInitialized();
 
     $(function(){ $(document).foundation(); });
 
-    SiteBindings.scrollFunctions();
-    SiteBindings.pageSpecificJS();
-    SiteBindings.pageSlickSliders();
+    Site.scrollFunctions();
+    Site.pageSpecificJS();
+    Site.pageSlickSliders();
 }
 
 function fireJsInitialized() {
-    if (SiteBindings.logging) console.log('js:initialized fired');
+    if (Site.logging) console.log('js:initialized fired');
     var event = document.createEvent('Event');
     event.initEvent('js:initialized', true, true); //can bubble, and is cancellable
     document.dispatchEvent(event);
 }
 
 document.addEventListener("turbolinks:load", function() {
-    SiteBindings.session.pagesVisited += 1;
+    Site.session.pagesVisited += 1;
     initialize();
 });
-
-// Initialize on page load
-// var addTurbolinksLoadListener = (function() {
-//   var executed = false;
-//
-//   return function () {
-//     if (!executed) {
-//       executed = true;
-//       if (SiteBindings.logging) console.log('addTurbolinksLoadListener -> Event Listener Loaded');
-//
-//       document.addEventListener("turbolinks:load", function() {
-//         if (SiteBindings.logging) console.log('tryInit -> Page Load Fired');
-//
-//         SiteBindings.session.pagesVisited += 1;
-//
-//         tryInit();
-//       });
-//     }
-//   };
-// })();
-
-// Try to initialize as long as async javascript is ready
-// function tryInit() {
-//     'use strict'
-//
-//     if (SiteBindings.logging) console.log('application.js - tryInit()');
-//
-//     if (typeof $ == 'function' && typeof SiteBindings == 'object') {
-//
-//         if (SiteBindings.logging) console.info('%c Page Ready', success);
-//         // Reset the load error count for next page load
-//         SiteBindings.loadErrorCount = 0;
-//         // If site is propoerly set up, initialize all javascript needed for site
-//         initialize();
-//         // And then add the event listener for turbolink page navigation
-//         addTurbolinksLoadListener();
-//
-//     } else {
-//         // Log the approporiate error that has caused the js to not load
-//         if (SiteBindings.logging) console.info('%c Page Not Ready', failure);
-//         if (SiteBindings.logging && typeof $ != 'function') console.error('jQuery NOT LOADING');
-//         if (SiteBindings.logging && typeof SiteBindings != 'object') console.error('SiteBindings NOT INITALIZED');
-//         // if (SiteBindings.logging && typeof DOMContentLoaded == 'undefined') console.error('DOMContentLoaded NOT SET');
-//         // if (SiteBindings.logging && DOMContentLoaded !== true) console.error('DOMContentLoaded NOT TRUE');
-//
-//         if (SiteBindings.loadErrorCount > 20) {
-//             // If The page has failed to load 20 times, reload the page after a 5 second pause
-//             if (SiteBindings.logging) console.info('%c Page has failed to load 20 times - Reloading in 5 seconds', failure);
-//             window.setTimeout(function(){
-//                 window.location.reload(false);
-//             }, 5000);
-//
-//         } else {
-//
-//             // Otherwise wait 50ms, add 1 to the loadErrorCount and try again
-//             SiteBindings.loadErrorCount += 1;
-//             window.setTimeout(function(){
-//                 if (SiteBindings.logging) console.warn('trying to reinitialize via tryInit()');
-//                 tryInit();
-//             }, 50);
-//         }
-//     }
-// }
-
-// tryInit();

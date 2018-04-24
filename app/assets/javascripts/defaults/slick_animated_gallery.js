@@ -1,7 +1,7 @@
 // Add .slick-animated-gallery, and fade: true to any slick slider to enable
 //   animated slide changes
 
-SiteBindings.slickAnimatedGallery = function() {
+Site.slickAnimatedGallery = function() {
     $('.slick-animated-gallery').on('beforeChange', function(event, slick, currentSlide, nextSlide){
 
         currentSlide = $($('.slick-animated-gallery .slick-slide')[currentSlide]);

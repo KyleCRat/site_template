@@ -1,5 +1,5 @@
-SiteBindings.pageSlickSliders = function() {
-  console.log('pageSlickSliders -> Fired')
+Site.pageSlickSliders = function() {
+  if (Site.logging) console.log('pageSlickSliders -> Fired')
   initSlickByClass();
 }
 

@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////
-// SiteBindings is the global function object
+// Site is the global function object
 //   used to keep things organized and safe to
 //   call while using turbolinks
 ///////////////////////////////////////////////////
-window.SiteBindings = {
+window.Site = {
     page: {
     },
     session: {

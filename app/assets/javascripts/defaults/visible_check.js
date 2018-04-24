@@ -1,5 +1,4 @@
-function isScrolledIntoView(elem)
-{
+function isScrolledIntoView(elem) {
     var docViewTop = $(window).scrollTop();
     var docViewBottom = docViewTop + $(window).height();
 
@@ -9,8 +8,7 @@ function isScrolledIntoView(elem)
     return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
 }
 
-function isScrolledIntoPartialView(elem)
-{
+function isScrolledIntoPartialView(elem) {
     var docViewTop = $(window).scrollTop();
     var docViewBottom = docViewTop + $(window).height();
 

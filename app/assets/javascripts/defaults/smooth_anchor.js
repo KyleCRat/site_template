@@ -1,4 +1,4 @@
-SiteBindings.smoothAnchor = function() {
+Site.smoothAnchor = function() {
   function filterPath(string) {
   return string
     .replace(/^\//,'')

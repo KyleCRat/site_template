@@ -2,7 +2,7 @@
 //   javascript that needs to be fired for just that page
 //   or group of pages under a sub page
 
-SiteBindings.pageSpecificJS = function() {
+Site.pageSpecificJS = function() {
   //Set scroll_function_array based on url
   var url = window.location.pathname;
   var baseURL = url.split('/')[1]
@@ -11,7 +11,7 @@ SiteBindings.pageSpecificJS = function() {
   // Be sure to have leading '/'
   switch(url) {
     case '/':
-      //SiteBindings.exampleUrlFunction();
+      //Site.exampleUrlFunction();
       break;
   }
 
@@ -19,7 +19,7 @@ SiteBindings.pageSpecificJS = function() {
   // Remove the leading '/'
   switch(baseURL) {
     case 'page':
-      //SiteBindings.examplePageFunction();
+      //Site.examplePageFunction();
       break;
   }
 }

@@ -1,4 +1,4 @@
-SiteBindings.fileNameUpdate = function(input) {
+Site.fileNameUpdate = function(input) {
 	var label	 = input.previousSibling,
 	labelVal = label.innerHTML;
 

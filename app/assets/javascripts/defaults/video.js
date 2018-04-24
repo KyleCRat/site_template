@@ -1,4 +1,4 @@
-SiteBindings.video = function() {
+Site.video = function() {
 
   $('.video-element').each(function(index, video) {
       video.controls = true;

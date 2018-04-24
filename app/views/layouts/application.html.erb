@@ -26,13 +26,6 @@
     <title><%= content_for :title %></title>
     <meta name="description" content="<%= meta_description %>">
 
-    <script>
-    // var DOMContentLoaded = false;
-    // document.addEventListener("DOMContentLoaded", function(event) {
-    //   DOMContentLoaded = true;
-    // });
-    </script>
-
     <%= split_stylesheet_link_tag "application", debug: false if ['staging','production'].include?(Rails.env)  %>
     <%= stylesheet_link_tag "application", media: 'all' unless ['staging','production'].include?(Rails.env) %>
 

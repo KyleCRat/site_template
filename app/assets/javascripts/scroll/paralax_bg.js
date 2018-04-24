@@ -1,5 +1,5 @@
-SiteBindings.paralaxPreviousRun = 0; // Reset global previous run variable
-SiteBindings.paralaxBG = function() {
+Site.paralaxPreviousRun = 0; // Reset global previous run variable
+Site.paralaxBG = function() {
   $('.paralax-bg').each(function() { // For each instance of class .paralx-bg on the page
     paralaxBGAnimate($(this)); // Call the Animate Function
   });
@@ -9,7 +9,7 @@ SiteBindings.paralaxBG = function() {
 function paralaxBGAnimate(section) {
   //Set variables
   var inView = isScrolledIntoPartialView(section), // Check if the section is within the window
-      previousRun = SiteBindings.paralaxPreviousRun,
+      previousRun = Site.paralaxPreviousRun,
       currentRun = window.timestamp,
       pfps = 1000/window.paralaxFPS, // Get the FPS to run the animation at
       delay = (currentRun - previousRun) > pfps,
@@ -42,6 +42,6 @@ function paralaxBGAnimate(section) {
     //   the paralx animation will take to complete (in seconds)
     paralaxOffsetBottom = (frameOffsetYEnd - window.pageYOffset) * (topMax / frameDistance);
     TweenLite.to(paralaxSectionImg, window.paralaxAnimationSpeed, {y:paralaxOffsetBottom});
-    SiteBindings.paralaxPreviousRun = currentRun;
+    Site.paralaxPreviousRun = currentRun;
   }
 }
