@@ -21,7 +21,7 @@
 //= require jquery.slick
 //= require js.cookie
 //= require maskedinput
-//= require sitebindings
+//= require site
 
 // Require Other JS Libraries
 // require countUp
