@@ -5,7 +5,7 @@ SiteBindings.pageSlickSliders = function() {
 
 //Take each slider ID from the slick_sliders_array and do
 function initSlickByClass() {
-  //Initalize the slider
+  //Initialize the slider
   if (!$('.is-slick').hasClass('slick-initialized')) {
     $('.is-slick').slick().fadeTo(350, 1)
   }

@@ -73,7 +73,7 @@ $(document).on('closed.zf.reveal', '.ajax-reveal', function(e) {
 });
 
 ///////////////////////////////////////////////////
-// Initalize all window variable arrays
+// Initialize all window variable arrays
 ///////////////////////////////////////////////////
 // Set how many times the scroll is checked per second for animation triggers
 window.scrollFPS = 20;
@@ -88,16 +88,16 @@ window.paralaxAnimationSpeed = 0.05;
 
 
 ///////////////////////////////////////////////////
-// Initalize all javascript for the site once
+// Initialize all javascript for the site once
 //   jQuery and SiteBindings have been confirmed
 //   to be loaded - This allows your application.js
 //   to safely load asynchronously
 ///////////////////////////////////////////////////
-function initalize() {
+function initialize() {
 
-    if (SiteBindings.logging) console.log('initalize -> Fired');
+    if (SiteBindings.logging) console.log('initialize -> Fired');
 
-    // Initalize The Scroll Checking Function on first
+    // Initialize The Scroll Checking Function on first
     //   load of the site
     if (SiteBindings.isLoading) {
     SiteBindings.session.startTime = Date.now();
@@ -115,18 +115,18 @@ function initalize() {
 }
 
 function fireJsInitialized() {
-    if (SiteBindings.logging) console.log('js:initalized fired');
+    if (SiteBindings.logging) console.log('js:initialized fired');
     var event = document.createEvent('Event');
-    event.initEvent('js:initalized', true, true); //can bubble, and is cancellable
+    event.initEvent('js:initialized', true, true); //can bubble, and is cancellable
     document.dispatchEvent(event);
 }
 
 document.addEventListener("turbolinks:load", function() {
     SiteBindings.session.pagesVisited += 1;
-    initalize();
+    initialize();
 });
 
-// Initalize on page load
+// Initialize on page load
 // var addTurbolinksLoadListener = (function() {
 //   var executed = false;
 //
@@ -146,7 +146,7 @@ document.addEventListener("turbolinks:load", function() {
 //   };
 // })();
 
-// Try to initalize as long as async javascript is ready
+// Try to initialize as long as async javascript is ready
 // function tryInit() {
 //     'use strict'
 //
@@ -158,7 +158,7 @@ document.addEventListener("turbolinks:load", function() {
 //         // Reset the load error count for next page load
 //         SiteBindings.loadErrorCount = 0;
 //         // If site is propoerly set up, initialize all javascript needed for site
-//         initalize();
+//         initialize();
 //         // And then add the event listener for turbolink page navigation
 //         addTurbolinksLoadListener();
 //
@@ -182,7 +182,7 @@ document.addEventListener("turbolinks:load", function() {
 //             // Otherwise wait 50ms, add 1 to the loadErrorCount and try again
 //             SiteBindings.loadErrorCount += 1;
 //             window.setTimeout(function(){
-//                 if (SiteBindings.logging) console.warn('trying to reinitalize via tryInit()');
+//                 if (SiteBindings.logging) console.warn('trying to reinitialize via tryInit()');
 //                 tryInit();
 //             }, 50);
 //         }
