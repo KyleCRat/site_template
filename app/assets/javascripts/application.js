@@ -88,6 +88,7 @@ function initialize() {
 
     $(function(){ $(document).foundation(); });
 
+    Site.videoListeners();
     Site.scrollFunctions();
     Site.pageSpecificJS();
     Site.pageSlickSliders();
