@@ -58,6 +58,10 @@ const failure = [
  'text-align: center'
 ].join(';');
 
+document.addEventListener("turbolinks:load", function() {
+  if (SiteBindings.logging) console.log('turbolinks:load');
+}
+
 
 if (SiteBindings.logging) console.log('Site Loaded at: '+ new Date().getTime());
 
