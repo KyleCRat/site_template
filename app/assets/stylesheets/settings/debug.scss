@@ -41,6 +41,33 @@ $debug-bg: #1d1f20;
     font-weight: bold;
     color: $cyan-accent;
   }
+
+  table {
+    height: 500px;
+    background-color: transparent;
+    border: 1px solid lighten($debug-bg, 10%);
+  }
+
+  thead {
+    overflow: scroll;
+    background-color: lighten($debug-bg, 50%);
+    border: 1px solid lighten($debug-bg, 50%);
+  }
+
+  tbody {
+    background-color: transparent;
+    border: 0;
+
+    tr:nth-child(even) {
+      background-color: lighten($debug-bg, 10%);
+    }
+
+    td:nth-child(2) {
+      word-break: break-word;
+      white-space: inherit;
+      overflow-wrap: break-word;
+    }
+  }
 }
 
 // Themes for the debugger
