@@ -101,15 +101,6 @@ gem 'pundit'
 # postgress database gem
 gem 'pg'
 
-# carrierwave to upload images
-gem 'carrierwave'
-
-# carrierwave upload to s3
-gem 'fog-aws'
-
-# ajax file uploads for carrierwave
-gem 'remotipart'
-
 # Nested attributes forms
 gem 'nested_form_fields'
 
