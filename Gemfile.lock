@@ -100,6 +100,10 @@ GEM
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
+    enumerations (2.3.1)
+      activerecord
+      activesupport
+      i18n
     erubi (1.7.1)
     erubis (2.7.0)
     eventmachine (1.2.7)
@@ -161,6 +165,7 @@ GEM
     http_parser.rb (0.6.0)
     i18n (1.1.1)
       concurrent-ruby (~> 1.0)
+    interactor (3.1.1)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -386,6 +391,7 @@ DEPENDENCIES
   css_splitter
   decent_exposure
   devise
+  enumerations
   factory_bot_rails
   faker
   figaro
@@ -395,6 +401,7 @@ DEPENDENCIES
   guard-livereload (~> 2.5)
   guard-rspec
   haml-rails
+  interactor
   jbuilder
   jquery-rails
   jquery-slick-rails
