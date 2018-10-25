@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ##########################################
-# Default Rails Gems
+# Rails Gems
 ##########################################
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -52,6 +52,12 @@ gem 'haml-rails'
 
 # A library for creating declarative interfaces in controllers
 gem 'decent_exposure'
+
+# Better Enumerations
+gem 'enumerations'
+
+# Single Service Objects
+gem 'interactor'
 
 ##########################################
 # Javascript

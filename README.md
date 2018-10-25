@@ -66,6 +66,12 @@ run `annotate` to quickly add helpful annotations to models, and specs
 ### [Decent Exposure](https://github.com/hashrocket/decent_exposure "Decent Exposure")
 A gem that helps keep controllers concise and easy to read.
 
+### [Enumerations](https://github.com/infinum/enumerations)
+Better enumerations for rails
+
+### [Interactor](https://github.com/collectiveidea/interactor)
+Interactor provides a common interface for performing complex user interactions.
+
 ### [Modernizer](https://github.com/russfrisch/modernizr-rails "Modernizer")
 Modernizer for easy access to what web technologies are available to the browser
 
