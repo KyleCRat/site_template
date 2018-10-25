@@ -32,7 +32,7 @@ Google analytics ID(s) can be placed in `assets/javascripts/vendor/google_analyt
 
 ## Javascript and JQuery
 
-This template makes full use of turbolinks 5. In a `Staging` or `Production` environment the `applicatoin.js` is loaded via the `defer` keyword to prevent the javascript from stalling the load times. These environment names can be changed in the `application.html.erb` layout file.
+This template makes full use of turbolinks 5. In a `Production` environment the `application.js` is loaded via the `defer` keyword to prevent the javascript from stalling the load times. These environment names can be changed in the `application.html.erb` layout file.
 
 ### initalize function
 
@@ -54,7 +54,7 @@ Place `Site.exampleFunction()` into the `page_specific.js`. There are two switch
 
 ### js:initialized event
 
-The `initialize` function will fire a `js:initialized` event every time it is fired, you can watch for this event and fire javascript and it will happen at the same time as all of your other js you have defined within the `initialize` function.
+The `initialize` function will fire a `js:initialized` event every time it is fired, you can watch for this event to fire js rather than putting the function call in the `initalize` function.
 
 ------------
 
@@ -128,3 +128,6 @@ A testing library that is much more readable than the default rails testing
 
 ### [Guard Livereload](https://github.com/guard/guard-livereload "Guard Livereload")
 By running `bundle exec guard` you can have your development browser auto reload on changes within your application
+
+### [Guard RSpec](https://github.com/guard/guard-rspec)
+Live checking of rspec tests
