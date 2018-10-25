@@ -49,13 +49,12 @@
 
 // when you click on something it won't highlight
 @mixin noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none;   /* Chrome/Safari/Opera */
-  -html-user-select: none;    /* Konqueror */
-  -moz-user-select: none;      /* Firefox */
-  -ms-user-select: none;       /* Internet Explorer/Edge */
-  user-select: none;           /* Non-prefixed version, currently
-                                  not supported by any browser */
+  -webkit-touch-callout: none; // iOS Safari
+  -webkit-user-select: none;   // Chrome/Safari/Opera
+  -html-user-select: none;     // Konqueror
+  -moz-user-select: none;      // Firefox
+  -ms-user-select: none;       // Internet Explorer/Edge
+  user-select: none;
 }
 
 // Set a rem font size with pixel fallback
@@ -63,14 +62,13 @@
 //   p {
 //     @include font-size(14px)
 //   }
-@function calculateRem($size) {
-  $remSize: $size / 16px;
-  @return $remSize * 1rem;
+@function calculate-rem($size) {
+  $rem-size: $size / 16px;
+  @return $rem-size * 1rem;
 }
 
 @mixin font-size($size) {
-  font-size: $size;
-  font-size: calculateRem($size);
+  font-size: calculate-rem($size);
 }
 
 // Hide a element visually only

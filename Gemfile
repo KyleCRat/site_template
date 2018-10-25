@@ -148,59 +148,61 @@ gem 'puma_worker_killer'
 ##########################################
 # PRODUCTION AND STAGING
 
-  group :production, :staging do
+group :production, :staging do
 
-    # helps serve font-face assets in Rails by setting CORS
-    gem 'font_assets'
+  # helps serve font-face assets in Rails by setting CORS
+  gem 'font_assets'
 
-    # Makes running your Rails app easier. Based on the ideas behind http://12factor.net
-    gem 'rails_12factor'
+  # Makes running your Rails app easier. Based on the ideas behind http://12factor.net
+  gem 'rails_12factor'
 
-    # Split the CSS for ie9 and below
-    gem 'css_splitter'
-  end
+  # Split the CSS for ie9 and below
+  gem 'css_splitter'
+end
 
 # END | PRODUCTION AND STAGING
 ##########################################
 # DEVELOPMENT AND TEST
 
-  group :development, :test do
-    # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-    gem 'byebug'
+group :development, :test do
+  gem 'byebug'
 
-    # define local variabes in development - config/
-    gem 'figaro'
+  # define local variabes in development - config/
+  gem 'figaro'
 
-    # Preview email in the default browser instead of sending it via
-    gem 'letter_opener'
+  # Preview email in the default browser instead of sending it via
+  gem 'letter_opener'
 
-    # A library for setting up Ruby objects as test data
-    gem "factory_bot"
+  # A library for setting up Ruby objects as test data
+  gem 'factory_bot_rails'
 
-    # A library for generating fake data
-    gem 'faker'
+  # A library for generating fake data
+  gem 'faker'
 
-    # Rspec testing library
-    gem 'rspec-rails'
-  end
+  # Rspec testing library
+  gem 'rspec-rails'
+
+  # Guard Live Watching of Rspec
+  gem 'guard-rspec'
+end
 
 # END | DEVELOPMENT AND TEST
 ##########################################
 # DEVELOPMENT ONLY
 
-  group :development do
-    # Access an IRB console on exception pages or by using <%= console %> in views
-    gem 'web-console', '~> 2.0'
+group :development do
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
 
-    # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-    gem 'spring'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
 
-    #live reload for auto refresh of development
-    gem 'guard-livereload', '~> 2.5', require: false
-    gem 'rack-livereload'
-  end
+  # Live reload for auto refresh of development
+  gem 'guard-livereload', '~> 2.5', require: false
+  gem 'rack-livereload'
+end
 
 # END | DEVELOPMENT ONLY
 ##########################################
 
-ruby '2.5.1'
+ruby '2.5.3'

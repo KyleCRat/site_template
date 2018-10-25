@@ -14,10 +14,6 @@ test:
   <<: *default
   database: <%= ENV['TEST_DATABASE_NAME'] %>
 
-staging:
-  adapter: postgresql
-  database: <%= ENV['STAGING_DATABASE_NAME'] %>
-
 production:
   adapter: postgresql
   database: <%= ENV['PRODUCTION_DATABASE_NAME'] %>

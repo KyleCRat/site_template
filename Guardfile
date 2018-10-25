@@ -1,21 +1,4 @@
-# A sample Guardfile
-# More info at https://github.com/guard/guard#readme
-
-## Uncomment and set this to only include directories you want to watch
-# directories %w(app lib config test spec features) \
-#  .select{|d| Dir.exists?(d) ? d : UI.warning("Directory #{d} does not exist")}
-
-## Note: if you are using the `directories` clause above and you are not
-## watching the project directory ('.'), then you will want to move
-## the Guardfile to a watched dir and symlink it back, e.g.
-#
-#  $ mkdir config
-#  $ mv Guardfile config/
-#  $ ln -s config/Guardfile .
-#
-# and, you'll have to watch "config/Guardfile" instead of "Guardfile"
-
-guard 'livereload' do
+guard :livereload do
   extensions = {
     css: :css,
     scss: :css,
@@ -30,7 +13,7 @@ guard 'livereload' do
     # less: :less, # uncomment if you want LESS stylesheets done in browser
   }
 
-  rails_view_exts = %w(erb haml slim)
+  rails_view_exts = %w(erb haml)
 
   # file types LiveReload may optimize refresh for
   compiled_exts = extensions.values.uniq
@@ -52,4 +35,19 @@ guard 'livereload' do
   watch(%r{app/views/.+\.(#{rails_view_exts * '|'})$})
   watch(%r{app/helpers/.+\.rb})
   watch(%r{config/locales/.+\.yml})
+end
+
+guard :rspec, cmd: 'bin/rspec', all_on_start: true do
+  watch(%r{^spec/.+_spec\.rb$})
+  watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
+  watch('spec/spec_helper.rb')  { "spec" }
+
+  # Rails example
+  watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }
+  watch(%r{^app/models/(.+)\.rb$})                    { |m| "spec/models/#{m[1]}_spec.rb" }
+  watch(%r{^app/controllers/(.+)_(controller)\.rb$})  { |m| ["spec/#{m[2]}s/#{m[1]}_#{m[2]}_spec.rb", "spec/acceptance/#{m[1]}_spec.rb"] }
+  watch(%r{^spec/support/(.+)\.rb$})                  { 'spec' }
+  watch('app/controllers/application_controller.rb')  { 'spec/controllers' }
+  # Capybara request specs
+  watch(%r{^app/views/(.+)/.*\.(erb|haml)$})          { |m| "spec/acceptance/#{m[1]}_spec.rb" }
 end

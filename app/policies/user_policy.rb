@@ -15,7 +15,7 @@ class UserPolicy
   end
 
   def show?
-    @current_user.auth_tier_5? or @current_user == @user
+    @current_user.auth_tier_5? || @current_user == @user
   end
 
   def update?
@@ -26,5 +26,4 @@ class UserPolicy
     return false if @current_user == @user
     @current_user.auth_tier_5?
   end
-
 end

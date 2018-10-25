@@ -6,21 +6,24 @@
   padding: 16px;
   margin: 0 auto 16px;
   color: $black;
-  background-color: $white;
+  background-color: $off-white;
   border-radius: 4px;
   transition: background-color .25s ease-out, box-shadow .25s ease-out;
 
   &.error,
   &.alert,
   &.warning {
-    background-color: #f7e4e1
+    color: darken($warn, 65%);
+    background-color: $warn;
   }
 
   &.notice {
-    background-color: #d7ecfa;
+    color: darken($notice, 65%);
+    background-color: $notice;
   }
 
   &.success {
-    background-color: #e1faea;
+    color: darken($success, 65%);
+    background-color: $success;
   }
 }

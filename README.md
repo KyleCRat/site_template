@@ -1,6 +1,6 @@
 # Ruby on Rails quick start template
 
-Rails 5.2 | Ruby 2.5.1
+Rails 5.2.1 | Ruby 2.5.3
 
 ------------
 
@@ -37,6 +37,10 @@ Place `Site.exampleFunction()` into the `page_specific.js`. There are two switch
 ### js:initialized event
 
 The `initialize` function will fire a `js:initialized` event every time it is fired, you can watch for this event and fire javascript and it will happen at the same time as all of your other js you have defined within the `initialize` function.
+
+------------
+
+Database.yml needs you to run `figaro install` and then populate the `config/application.yml` with the ENV keys required to set up the database. You can also do this with rails new credentials.
 
 ------------
 
@@ -99,7 +103,7 @@ A gem that adds environment variables to your development environment.
 ### [Letter Opener](https://github.com/ryanb/letter_opener "Letter Opener")
 Change your development environment to open mailers in a browser window rather than sending
 
-### [Factory Bot](https://github.com/thoughtbot/factory_bot "Factory Bot")
+### [Factory Bot Rails](https://github.com/thoughtbot/factory_bot "Factory Bot")
 A library for setting up ruby objects for test data
 
 ### [Faker](https://github.com/stympy/faker "Faker")
