@@ -27,9 +27,7 @@ gem 'bootsnap', require: false
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Eaily view db schemas - bundle exec annotate
-group :development do
-  gem 'annotate'
-end
+gem 'annotate', group: :development
 
 ##########################################
 # Design, structure, and management
