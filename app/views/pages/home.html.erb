@@ -1,4 +1,5 @@
-<% title '' %>
-<% meta_description '' %>
-root_path => pages#home
-<%= link_to('Test Ajax Modal', ajax_modal_index_path, remote: true, class: 'button') %>
+<% title 'Homepage' %>
+<% meta_description 'PagesController => Home' %>
+<p>root_path => pages#home</p>
+
+<%= remote_modal('Modal Button', 'new_modal_test', remote: true, class: 'button')  %>
